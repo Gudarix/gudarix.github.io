@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gudarix</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0b0f1a;
+      --navy2:   #111827;
+      --navy3:   #1a2235;
+      --red:     #d42b2b;
+      --red2:    #ff3b3b;
+      --gold:    #c9a84c;
+      --white:   #f0f4ff;
+      --muted:   #8896b3;
+      --border:  #1e2d45;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+      height: 60px;
+      background: rgba(11,15,26,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--red); }
+    nav ul {
+      list-style: none;
+      display: flex; gap: 2rem;
+    }
+    nav ul a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 60vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(212,43,43,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 12vw, 9rem);
+      letter-spacing: 4px;
+      line-height: 0.9;
+      color: var(--white);
+    }
+    .hero-sub {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 480px;
+    }
+    .hero-sub em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .hero-cta {
+      margin-top: 2.5rem;
+      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 1rem 2.4rem;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--red);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--red2); transform: translateY(-1px); }
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: transparent;
+    }
+    .btn-outline:hover { border-color: var(--muted); color: var(--white); }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 5rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: 2px;
+      color: var(--white);
+      margin-bottom: 2.5rem;
+    }
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── VIDEOS ── */
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .video-card {
+      background: var(--navy3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .video-card:hover { border-color: var(--red); transform: translateY(-2px); }
+    .video-card iframe {
+      width: 100%; aspect-ratio: 16/9;
+      display: block; border: none;
+    }
+    .video-info { padding: 1rem; }
+    .video-info p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ── PLAYLISTS ── */
+    .playlists-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+    .playlist-card {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--navy3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      text-decoration: none;
+      transition: border-color 0.2s;
+    }
+    .playlist-card:hover { border-color: var(--gold); }
+    .playlist-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+    .playlist-card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .playlist-card p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ── PRODUCTOS ── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+    .product-card {
+      background: var(--navy3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      text-decoration: none;
+      display: flex; flex-direction: column; gap: 0.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .product-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+    .product-tag {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .product-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .product-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ── AFILIADOS ── */
+    .affiliates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.2rem;
+    }
+    .affiliate-card {
+      background: var(--navy3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.2rem 1.5rem;
+      text-decoration: none;
+      display: flex; align-items: center; gap: 1rem;
+      transition: border-color 0.2s;
+    }
+    .affiliate-card:hover { border-color: var(--red); }
+    .affiliate-card span {
+      font-size: 1.4rem;
+    }
+    .affiliate-card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .affiliate-card p {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── REDES ── */
+    .social-row {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+    }
+    .social-btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 0.7rem 1.4rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .social-btn:hover { border-color: var(--red); color: var(--white); }
+    .social-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--red); }
+
+    @media (max-width: 600px) {
+      nav ul { display: none; }
+      .videos-grid, .playlists-grid, .products-grid, .affiliates-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">GUDARIX</a>
+    <ul>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#playlists">Playlists</a></li>
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#afiliados">Afiliados</a></li>
+      <li><a href="#redes">Redes</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>GUDARIX</h1>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://www.youtube.com/@gudarixpe" target="_blank">
+        ▶ Visita el canal
+      </a>
+      <a class="btn btn-outline" href="#videos">Últimos videos ↓</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ÚLTIMOS VIDEOS -->
+  <section id="videos">
+    <p class="section-label">YouTube</p>
+    <h2 class="section-title">Últimos Videos</h2>
+    <div class="videos-grid">
+      <!-- Reemplaza los IDs por los de tus últimos videos -->
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" allowfullscreen loading="lazy"></iframe>
+        <div class="video-info">
+          <p>Agrega aquí el título del video</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen loading="lazy"></iframe>
+        <div class="video-info">
+          <p>Agrega aquí el título del video</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" allowfullscreen loading="lazy"></iframe>
+        <div class="video-info">
+          <p>Agrega aquí el título del video</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PLAYLISTS -->
+  <section id="playlists">
+    <p class="section-label">Colecciones</p>
+    <h2 class="section-title">Playlists</h2>
+    <div class="playlists-grid">
+      <!-- Reemplaza los href con los links reales de tus playlists -->
+      <a class="playlist-card" href="#" target="_blank">
+        <span>🎮</span>
+        <div>
+          <h3>Nombre de la playlist</h3>
+          <p>Descripción corta</p>
+        </div>
+      </a>
+      <a class="playlist-card" href="#" target="_blank">
+        <span>🖨️</span>
+        <div>
+          <h3>Nombre de la playlist</h3>
+          <p>Descripción corta</p>
+        </div>
+      </a>
+      <a class="playlist-card" href="#" target="_blank">
+        <span>📦</span>
+        <div>
+          <h3>Nombre de la playlist</h3>
+          <p>Descripción corta</p>
+        </div>
+      </a>
+      <a class="playlist-card" href="#" target="_blank">
+        <span>⚙️</span>
+        <div>
+          <h3>Nombre de la playlist</h3>
+          <p>Descripción corta</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PRODUCTOS -->
+  <section id="productos">
+    <p class="section-label">Mis productos</p>
+    <h2 class="section-title">Productos</h2>
+    <div class="products-grid">
+      <a class="product-card" href="https://cults3d.com" target="_blank">
+        <span class="product-tag">Diseño 3D</span>
+        <h3>Archivos STL en Cults3D</h3>
+        <p>Modelos para imprimir en casa</p>
+      </a>
+      <a class="product-card" href="#" target="_blank">
+        <span class="product-tag">Libro</span>
+        <h3>Título del libro</h3>
+        <p>Descripción corta aquí</p>
+      </a>
+      <!-- Agrega más productos aquí -->
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- AFILIADOS -->
+  <section id="afiliados">
+    <p class="section-label">Links recomendados</p>
+    <h2 class="section-title">Afiliados</h2>
+    <div class="affiliates-grid">
+      <!-- Reemplaza los href con tus links de afiliado reales -->
+      <a class="affiliate-card" href="#" target="_blank">
+        <span>📦</span>
+        <div>
+          <h3>Producto recomendado</h3>
+          <p>Descripción corta</p>
+        </div>
+      </a>
+      <a class="affiliate-card" href="#" target="_blank">
+        <span>🎮</span>
+        <div>
+          <h3>Producto recomendado</h3>
+          <p>Descripción corta</p>
+        </div>
+      </a>
+      <a class="affiliate-card" href="#" target="_blank">
+        <span>🖨️</span>
+        <div>
+          <h3>Producto recomendado</h3>
+          <p>Descripción corta</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- REDES SOCIALES -->
+  <section id="redes">
+    <p class="section-label">Encuéntrame en</p>
+    <h2 class="section-title">Redes Sociales</h2>
+    <div class="social-row">
+      <a class="social-btn" href="https://www.youtube.com/@gudarixpe" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+        YouTube
+      </a>
+      <a class="social-btn" href="https://www.instagram.com/gudarixpe" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.1-4.8C2.4 3.9 4 2.3 7.2 2.2c1.2-.1 1.6-.1 4.8-.1zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.1 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg>
+        Instagram
+      </a>
+      <!-- Agrega más redes si tienes -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Gudarix · Arequipa, Perú · <a href="https://www.youtube.com/@gudarixpe" target="_blank">@gudarixpe</a></p>
+  </footer>
+
+</body>
+</html>
